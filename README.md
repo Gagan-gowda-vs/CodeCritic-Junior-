@@ -3,7 +3,7 @@
   <strong>An AI-powered coach designed to help beginner programmers improve their coding style through real-time, personalized feedback.</strong>
 </p>
 <p>
-  <em>Built for the ACY 2024-25 Experiential Learning project at RV College of Engineering.</em>
+<!--   <em>Built for the ACY 2024-25 Experiential Learning project at RV College of Engineering.</em> -->
 </p>
 
 ---
@@ -31,11 +31,10 @@ Our platform is packed with features designed to create a comprehensive and enga
 
 ---
 
-## 📸 Screenshots
-
+## 📸 Snapshots 
 Here’s a glimpse of the CodeCritic Junior platform in action.
 
-<img src="https://i.imgur.com/your-dashboard-image.png" alt="CodeCritic Junior Dashboard" width="80%">
+<img src="images/Dashboard.png" alt="CodeCritic Junior Dashboard" width="80%">
 <p><em>The main dashboard with AI Assistant integration.</em></p>
 <br>
 <img src="https://i.imgur.com/your-learning-center.png" alt="Learning Center" width="80%">
@@ -113,3 +112,4 @@ This project was developed by a dedicated team of students from RV College of En
 | Gagan gowda V S | 1RV23AI400 | AIML |
 | Ved M Revankar | 1RV23CS419 | CS |
 | Tejas Ganesh Hegde | 1RV22CS219 | CS |
+
