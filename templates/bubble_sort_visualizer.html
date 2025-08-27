@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bubble Sort Step Visualizer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #fff;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #fff;
+            font-size: 2em;
+            font-weight: 600;
+        }
+
+        #complexity {
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 1.1em;
+            color: #a0a0a0;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+        }
+
+        #controls {
+            margin-bottom: 25px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        #controls input {
+            padding: 12px 15px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+            font-size: 14px;
+            width: 250px;
+            transition: all 0.3s ease;
+        }
+
+        #controls input:focus {
+            outline: none;
+            border-color: #4a90e2;
+            box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
+        }
+
+        button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 10px;
+            background: #4a90e2;
+            color: white;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background: #357abd;
+            transform: translateY(-2px);
+        }
+
+        #step-controls {
+            margin-bottom: 25px;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        #step-controls button {
+            background: #2c3e50;
+        }
+
+        #step-controls button:hover {
+            background: #34495e;
+        }
+
+        #playPauseBtn {
+            background: #27ae60;
+        }
+
+        #playPauseBtn:hover {
+            background: #219a52;
+        }
+
+        .array-row {
+            position: relative;
+            height: 100px;
+            margin: 40px 0;
+            min-width: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .num-box {
+            width: 70px;
+            height: 70px;
+            background: #2c3e50;
+            color: #fff;
+            font-size: 1.5em;
+            font-weight: 600;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.5s cubic-bezier(.68,-0.55,.27,1.55);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .num-box.unsorted { 
+            background: #2c3e50;
+            color: #fff;
+        }
+
+        .num-box.compare { 
+            background: #e74c3c;
+            color: #fff;
+            transform: scale(1.1);
+            z-index: 2;
+        }
+
+        .num-box.swap { 
+            background: #f1c40f;
+            color: #2c3e50;
+            z-index: 3;
+        }
+
+        .num-box.sorted { 
+            background: #27ae60;
+            color: #fff;
+            z-index: 2;
+        }
+
+        #legend {
+            margin: 25px 0;
+            display: flex;
+            gap: 25px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #a0a0a0;
+        }
+
+        .legend-color {
+            width: 25px;
+            height: 25px;
+            border-radius: 8px;
+            display: inline-block;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        #counters {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 20px;
+            font-size: 1.1em;
+            color: #a0a0a0;
+        }
+
+        #caption {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 1.2em;
+            min-height: 1.5em;
+            color: #fff;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        #speed-control {
+            -webkit-appearance: none;
+            width: 150px;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            outline: none;
+        }
+
+        #speed-control::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            background: #4a90e2;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        #speed-control::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        #step-indicator, #pass-indicator {
+            color: #a0a0a0;
+            font-size: 1.1em;
+            padding: 8px 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+        }
+
+        #speed-label {
+            color: #a0a0a0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Bubble Sort Step Visualizer</h2>
+        <div id="complexity" style="text-align:center; margin-bottom:18px; font-size:1.1em;">
+            <b>Time Complexity:</b> O(n<sup>2</sup>) &nbsp; | &nbsp; <b>Space Complexity:</b> O(1)
+        </div>
+        <div id="controls">
+            <label>Array (comma separated): <input id="array-input" value="18,32,-11,6,68,2,-34"></label>
+            <button onclick="prepareSteps()">Visualize</button>
+            <button onclick="randomArray()">Randomize</button>
+            <button id="reset-btn" onclick="resetVisualizer()">Reset</button>
+        </div>
+        <div id="step-controls" style="display:none; align-items: center;">
+            <button onclick="prevStep()">&#8592; Previous</button>
+            <button id="playPauseBtn" onclick="togglePlay()">Play</button>
+            <button onclick="nextStep()">Next &#8594;</button>
+            <span id="step-indicator"></span>
+            <span id="pass-indicator"></span>
+            <label id="speed-label" for="speed-control" style="margin-left:24px;">Speed:</label>
+            <input id="speed-control" type="range" min="200" max="2000" value="900" step="100" style="vertical-align:middle;">
+        </div>
+        <div id="legend">
+            <span class="legend-item"><span class="legend-color" style="background:#ffe0b2"></span>Unsorted</span>
+            <span class="legend-item"><span class="legend-color" style="background:#ba68c8"></span>Comparing</span>
+            <span class="legend-item"><span class="legend-color" style="background:#e53935"></span>Swapping</span>
+            <span class="legend-item"><span class="legend-color" style="background:#43a047"></span>Sorted</span>
+        </div>
+        <div id="counters">
+            <span id="compare-counter">Comparisons: 0</span>
+            <span id="swap-counter">Swaps: 0</span>
+        </div>
+        <!-- <div id="progress-bar-bg"><div id="progress-bar" style="width:0%"></div></div> -->
+        <!-- <div id="indices-row" style="min-width:400px;"></div> -->
+        <div class="array-row" id="array-row"></div>
+        <div id="caption"></div>
+    </div>
+    <script>
+    let steps = [];
+    let currentStep = 0;
+    let playInterval = null;
+    let animating = false;
+    let compareCount = 0;
+    let swapCount = 0;
+    const boxWidth = 76; // 60px + 2*8px margin
+
+    function randomArray() {
+        let arr = [];
+        let len = Math.floor(Math.random() * 4) + 6; // 6-9 elements
+        for (let i = 0; i < len; i++) {
+            arr.push(Math.floor(Math.random() * 99) - 30);
+        }
+        document.getElementById('array-input').value = arr.join(',');
+        prepareSteps();
+    }
+
+    function prepareSteps() {
+        let arr = document.getElementById('array-input').value.split(',').map(x => parseInt(x.trim())).filter(x => !isNaN(x));
+        if (arr.length === 0) return alert('Enter a valid array!');
+        steps = [];
+        compareCount = 0;
+        swapCount = 0;
+        let n = arr.length;
+        let a = arr.slice();
+        let sorted = Array(n).fill(false);
+
+        for (let i = 0; i < n - 1; i++) {
+            for (let j = 0; j < n - i - 1; j++) {
+                steps.push({
+                    array: a.slice(),
+                    compare: [j, j+1],
+                    swap: false,
+                    sorted: sorted.slice(),
+                    pass: i+1
+                });
+                compareCount++;
+                if (a[j] > a[j+1]) {
+                    [a[j], a[j+1]] = [a[j+1], a[j]];
+                    steps.push({
+                        array: a.slice(),
+                        compare: [j, j+1],
+                        swap: true,
+                        sorted: sorted.slice(),
+                        pass: i+1
+                    });
+                    swapCount++;
+                }
+            }
+            sorted[n-i-1] = true;
+            steps.push({
+                array: a.slice(),
+                compare: [],
+                swap: false,
+                sorted: sorted.slice(),
+                pass: i+1
+            });
+        }
+        sorted[0] = true;
+        steps.push({
+            array: a.slice(),
+            compare: [],
+            swap: false,
+            sorted: sorted.slice(),
+            pass: n-1
+        });
+
+        currentStep = 0;
+        document.getElementById('step-controls').style.display = '';
+        showStep(0, true);
+    }
+
+    // Keep track of the current DOM order for animation
+    let currentOrder = [];
+
+    function getCaption(step) {
+        if (step.swap) {
+            return `Swapping elements at positions ${step.compare[0]} and ${step.compare[1]} (${step.array[step.compare[1]]} & ${step.array[step.compare[0]]}) because ${step.array[step.compare[1]]} < ${step.array[step.compare[0]]}.`;
+        } else if (step.compare && step.compare.length === 2) {
+            return `Comparing elements at positions ${step.compare[0]} and ${step.compare[1]} (${step.array[step.compare[0]]} & ${step.array[step.compare[1]]}).`;
+        } else if (step.sorted && step.sorted.filter(Boolean).length > 0) {
+            let sortedIndices = step.sorted.map((v, i) => v ? i : null).filter(v => v !== null);
+            if (sortedIndices.length === step.array.length) {
+                return `All elements are sorted!`;
+            } else {
+                return `Element at position ${sortedIndices[sortedIndices.length-1]} (${step.array[sortedIndices[sortedIndices.length-1]]}) is now in its final sorted position.`;
+            }
+        }
+        return "";
+    }
+
+    function showIndicesRow(length) {
+        const indicesRow = document.getElementById('indices-row');
+        indicesRow.innerHTML = '';
+        for (let i = 0; i < length; i++) {
+            const idxBox = document.createElement('div');
+            idxBox.className = 'index-box';
+            idxBox.textContent = i;
+            indicesRow.appendChild(idxBox);
+        }
+    }
+
+    function showStep(idx, instant=false) {
+        if (idx < 0 || idx >= steps.length) return;
+        currentStep = idx;
+        const step = steps[idx];
+        const row = document.getElementById('array-row');
+        const boxWidth = 76; // 60px + 2*8px margin
+
+        // On first render or after prepareSteps, create boxes
+        if (currentOrder.length !== step.array.length || row.children.length === 0) {
+            row.innerHTML = '';
+            currentOrder = [];
+            step.array.forEach((val, i) => {
+                const box = document.createElement('div');
+                box.className = 'num-box unsorted';
+                box.textContent = val;
+                box.style.left = (i * boxWidth) + 'px';
+                if (step.sorted[i]) {
+                    box.classList.add('sorted');
+                } else if (step.compare.includes(i)) {
+                    box.classList.add(step.swap ? 'swap' : 'compare');
+                }
+                row.appendChild(box);
+                currentOrder.push(i);
+            });
+        } else {
+            // Only update classes and text, not DOM order
+            step.array.forEach((val, i) => {
+                const box = row.children[currentOrder.indexOf(i)];
+                box.textContent = val;
+                box.className = 'num-box unsorted';
+                if (step.sorted[i]) {
+                    box.classList.add('sorted');
+                } else if (step.compare.includes(i)) {
+                    box.classList.add(step.swap ? 'swap' : 'compare');
+                }
+            });
+        }
+        document.getElementById('step-indicator').textContent = `Step ${idx+1} / ${steps.length}`;
+        document.getElementById('caption').textContent = getCaption(step);
+
+        // Counters
+        let compareSoFar = 0, swapSoFar = 0;
+        for (let i = 0; i <= idx; i++) {
+            if (steps[i].compare && steps[i].compare.length === 2) compareSoFar++;
+            if (steps[i].swap) swapSoFar++;
+        }
+        document.getElementById('compare-counter').textContent = `Comparisons: ${compareSoFar}`;
+        document.getElementById('swap-counter').textContent = `Swaps: ${swapSoFar}`;
+
+        // Pass indicator
+        document.getElementById('pass-indicator').textContent = `Pass: ${step.pass || 1}`;
+
+        // Animate swap if needed
+        if (step.swap && !instant) {
+            animateSwap(step.compare[0], step.compare[1]);
+        } else {
+            // Always update positions
+            step.array.forEach((_, i) => {
+                const box = row.children[currentOrder.indexOf(i)];
+                box.style.left = (i * boxWidth) + 'px';
+            });
+        }
+    }
+
+    function animateSwap(i, j) {
+        animating = true;
+        const row = document.getElementById('array-row');
+        const boxWidth = 76;
+        const idxA = currentOrder.indexOf(i);
+        const idxB = currentOrder.indexOf(j);
+        const boxA = row.children[idxA];
+        const boxB = row.children[idxB];
+
+        // Move to new positions (slide only)
+        boxA.style.left = (j * boxWidth) + 'px';
+        boxB.style.left = (i * boxWidth) + 'px';
+
+        setTimeout(() => {
+            // Swap the order in currentOrder
+            [currentOrder[idxA], currentOrder[idxB]] = [currentOrder[idxB], currentOrder[idxA]];
+            animating = false;
+        }, 500); // Match the transition duration
+    }
+
+    function nextStep() {
+        if (animating) return;
+        if (currentStep < steps.length - 1) {
+            showStep(currentStep + 1);
+        }
+    }
+    function prevStep() {
+        if (animating) return;
+        if (currentStep > 0) {
+            showStep(currentStep - 1, true);
+        }
+    }
+
+    function getSpeed() {
+        // Reverse the slider: left (min) = slow, right (max) = fast
+        const slider = document.getElementById('speed-control');
+        const min = parseInt(slider.min);
+        const max = parseInt(slider.max);
+        const val = parseInt(slider.value);
+        // Map: left (min) = max delay, right (max) = min delay
+        return max + min - val;
+    }
+
+    function togglePlay() {
+        const btn = document.getElementById('playPauseBtn');
+        const speed = getSpeed();
+        if (playInterval) {
+            clearInterval(playInterval);
+            playInterval = null;
+            btn.textContent = "Play";
+        } else {
+            btn.textContent = "Pause";
+            playInterval = setInterval(() => {
+                if (currentStep < steps.length - 1 && !animating) {
+                    nextStep();
+                } else if (currentStep >= steps.length - 1) {
+                    clearInterval(playInterval);
+                    playInterval = null;
+                    btn.textContent = "Play";
+                }
+            }, speed);
+        }
+    }
+
+    document.getElementById('speed-control').addEventListener('input', function() {
+        if (playInterval) {
+            togglePlay();
+            togglePlay();
+        }
+    });
+
+    function resetVisualizer() {
+        if (playInterval) togglePlay();
+        currentStep = 0;
+        showStep(0, true);
+    }
+
+    // Initial render
+    prepareSteps();
+    </script>
+</body>
+</html>

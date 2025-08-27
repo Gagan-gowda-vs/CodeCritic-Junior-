@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeCritic Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .stat-card {
+            border-radius: 10px;
+            transition: transform 0.2s;
+        }
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        .activity-item {
+            border-left: 3px solid #007bff;
+            padding-left: 15px;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body class="bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="#">CodeCritic Dashboard</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/"><i class="fas fa-home"></i> Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <!-- Statistics Overview -->
+        <div class="row mb-4">
+            <div class="col-md-3">
+                <div class="card stat-card bg-primary text-white">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-code"></i> Problems Solved</h5>
+                        <h2 class="card-text">24</h2>
+                        <p class="card-text"><small>+3 this week</small></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card stat-card bg-success text-white">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-star"></i> Average Rating</h5>
+                        <h2 class="card-text">4.5</h2>
+                        <p class="card-text"><small>Out of 5.0</small></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card stat-card bg-info text-white">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-clock"></i> Time Spent</h5>
+                        <h2 class="card-text">12h</h2>
+                        <p class="card-text"><small>This week</small></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card stat-card bg-warning text-white">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-trophy"></i> Rank</h5>
+                        <h2 class="card-text">#42</h2>
+                        <p class="card-text"><small>Top 10%</small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts -->
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Problem Solving Progress</h5>
+                        <canvas id="progressChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Language Distribution</h5>
+                        <canvas id="languageChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Activity -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Recent Activity</h5>
+                        <div class="activity-item">
+                            <h6>Solved "Two Sum" Problem</h6>
+                            <p class="text-muted">2 hours ago</p>
+                        </div>
+                        <div class="activity-item">
+                            <h6>Completed "Bubble Sort" Visualization</h6>
+                            <p class="text-muted">5 hours ago</p>
+                        </div>
+                        <div class="activity-item">
+                            <h6>Improved code rating for "Binary Search"</h6>
+                            <p class="text-muted">1 day ago</p>
+                        </div>
+                        <div class="activity-item">
+                            <h6>Started "Merge Sort" Challenge</h6>
+                            <p class="text-muted">2 days ago</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Progress Chart
+        const progressCtx = document.getElementById('progressChart').getContext('2d');
+        new Chart(progressCtx, {
+            type: 'line',
+            data: {
+                labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+                datasets: [{
+                    label: 'Problems Solved',
+                    data: [5, 8, 15, 24],
+                    borderColor: '#007bff',
+                    tension: 0.1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Language Distribution Chart
+        const languageCtx = document.getElementById('languageChart').getContext('2d');
+        new Chart(languageCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Python', 'JavaScript', 'Java', 'C++'],
+                datasets: [{
+                    data: [45, 25, 20, 10],
+                    backgroundColor: ['#007bff', '#28a745', '#ffc107', '#dc3545']
+                }]
+            },
+            options: {
+                responsive: true
+            }
+        });
+    </script>
+</body>
+</html>

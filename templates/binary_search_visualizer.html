@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Binary Search Step Visualizer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #fff;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #fff;
+            font-size: 2em;
+            font-weight: 600;
+        }
+
+        #complexity {
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 1.1em;
+            color: #a0a0a0;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+        }
+
+        #controls {
+            margin-bottom: 25px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        #controls input {
+            padding: 12px 15px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+            font-size: 14px;
+            width: 250px;
+            transition: all 0.3s ease;
+        }
+
+        #controls input:focus {
+            outline: none;
+            border-color: #4a90e2;
+            box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
+        }
+
+        button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 10px;
+            background: #4a90e2;
+            color: white;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background: #357abd;
+            transform: translateY(-2px);
+        }
+
+        #step-controls {
+            margin-bottom: 25px;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        #step-controls button {
+            background: #2c3e50;
+        }
+
+        #step-controls button:hover {
+            background: #34495e;
+        }
+
+        #playPauseBtn {
+            background: #27ae60;
+        }
+
+        #playPauseBtn:hover {
+            background: #219a52;
+        }
+
+        .array-row {
+            position: relative;
+            height: 100px;
+            margin: 40px 0;
+            min-width: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .num-box {
+            width: 70px;
+            height: 70px;
+            background: #2c3e50;
+            color: #fff;
+            font-size: 1.5em;
+            font-weight: 600;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.5s cubic-bezier(.68,-0.55,.27,1.55);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .num-box.unsorted { 
+            background: #2c3e50;
+            color: #fff;
+        }
+
+        .num-box.mid { 
+            background: #e74c3c;
+            color: #fff;
+            transform: scale(1.1);
+            z-index: 2;
+        }
+
+        .num-box.found { 
+            background: #27ae60;
+            color: #fff;
+            z-index: 2;
+        }
+
+        .num-box.eliminated { 
+            background: #95a5a6;
+            color: #fff;
+            z-index: 2;
+        }
+
+        .num-box.range { 
+            background: #3498db;
+            color: #fff;
+            z-index: 1;
+        }
+
+        #legend {
+            margin: 25px 0;
+            display: flex;
+            gap: 25px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #a0a0a0;
+        }
+
+        .legend-color {
+            width: 25px;
+            height: 25px;
+            border-radius: 8px;
+            display: inline-block;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        #counters {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 20px;
+            font-size: 1.1em;
+            color: #a0a0a0;
+        }
+
+        #caption {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 1.2em;
+            min-height: 1.5em;
+            color: #fff;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        #speed-control {
+            -webkit-appearance: none;
+            width: 150px;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            outline: none;
+        }
+
+        #speed-control::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            background: #4a90e2;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        #speed-control::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        #step-indicator, #pass-indicator {
+            color: #a0a0a0;
+            font-size: 1.1em;
+            padding: 8px 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+        }
+
+        #speed-label {
+            color: #a0a0a0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Binary Search Step Visualizer</h2>
+        <div id="controls">
+            <label>Sorted Array: <input id="array-input" value="-34,-11,2,6,18,32,68"></label>
+            <label>Search for: <input id="search-value" value="6"></label>
+            <button onclick="prepareSteps()">Visualize</button>
+            <button onclick="randomArray()">Randomize</button>
+            <button id="reset-btn" onclick="resetVisualizer()">Reset</button>
+        </div>
+        <div id="step-controls">
+            <button onclick="prevStep()">&#8592; Previous</button>
+            <button id="playPauseBtn" onclick="togglePlay()">Play</button>
+            <button onclick="nextStep()">Next &#8594;</button>
+            <span id="step-indicator"></span>
+            <label id="speed-label" for="speed-control" style="margin-left:24px;">Speed:</label>
+            <input id="speed-control" type="range" min="200" max="2000" value="900" step="100" style="vertical-align:middle;">
+        </div>
+        <div id="legend">
+            <span class="legend-item"><span class="legend-color" style="background:#ffe0b2"></span>Unsearched</span>
+            <span class="legend-item"><span class="legend-color" style="background:#039be5"></span>Low</span>
+            <span class="legend-item"><span class="legend-color" style="background:#ba68c8"></span>High</span>
+            <span class="legend-item"><span class="legend-color" style="background:#ffb300"></span>Mid</span>
+            <span class="legend-item"><span class="legend-color" style="background:#43a047"></span>Found</span>
+            <span class="legend-item"><span class="legend-color" style="background:#e53935"></span>Not Found</span>
+        </div>
+        <div class="array-center">
+            <div class="array-row" id="array-row"></div>
+        </div>
+        <div id="caption"></div>
+    </div>
+    <script>
+    let steps = [];
+    let currentStep = 0;
+    let playInterval = null;
+    const boxWidth = 76; // 60px + margin
+
+    function randomArray() {
+        let arr = [];
+        let len = Math.floor(Math.random() * 4) + 6; // 6-9 elements
+        for (let i = 0; i < len; i++) {
+            arr.push(Math.floor(Math.random() * 99) - 30);
+        }
+        arr.sort((a, b) => a - b);
+        document.getElementById('array-input').value = arr.join(',');
+        document.getElementById('search-value').value = arr[Math.floor(Math.random() * arr.length)];
+        prepareSteps();
+    }
+
+    function prepareSteps() {
+        let arr = document.getElementById('array-input').value.split(',').map(x => parseInt(x.trim())).filter(x => !isNaN(x));
+        let target = parseInt(document.getElementById('search-value').value);
+        if (arr.length === 0 || isNaN(target)) return alert('Enter a valid sorted array and search value!');
+        steps = [];
+        let l = 0, r = arr.length - 1, found = false;
+        while (l <= r) {
+            let mid = Math.floor((l + r) / 2);
+            steps.push({
+                array: arr.slice(),
+                low: l,
+                high: r,
+                mid: mid,
+                found: false,
+                failed: false,
+                target: target
+            });
+            if (arr[mid] === target) {
+                steps.push({
+                    array: arr.slice(),
+                    low: l,
+                    high: r,
+                    mid: mid,
+                    found: true,
+                    failed: false,
+                    target: target
+                });
+                found = true;
+                break;
+            } else if (arr[mid] < target) {
+                l = mid + 1;
+            } else {
+                r = mid - 1;
+            }
+        }
+        if (!found) {
+            steps.push({
+                array: arr.slice(),
+                low: -1,
+                high: -1,
+                mid: -1,
+                found: false,
+                failed: true,
+                target: target
+            });
+        }
+        currentStep = 0;
+        showStep(0, true);
+    }
+
+    function showStep(idx, instant=false) {
+        if (idx < 0 || idx >= steps.length) return;
+        currentStep = idx;
+        const step = steps[idx];
+        const row = document.getElementById('array-row');
+        row.innerHTML = '';
+        row.style.width = (step.array.length * boxWidth) + "px";
+        step.array.forEach((val, i) => {
+            const box = document.createElement('div');
+            box.className = 'num-box unsorted';
+            box.textContent = val;
+            box.style.left = (i * boxWidth) + 'px';
+            if (step.low === i && !step.found && !step.failed) box.classList.add('low');
+            if (step.high === i && !step.found && !step.failed) box.classList.add('high');
+            if (step.mid === i && !step.found && !step.failed) box.classList.add('mid');
+            if (step.found && step.mid === i) {
+                box.classList.remove('mid');
+                box.classList.add('found');
+            }
+            if (step.failed) {
+                box.classList.add('failed');
+            }
+            row.appendChild(box);
+        });
+        document.getElementById('step-indicator').textContent = `Step ${idx+1} / ${steps.length}`;
+        if (step.found) {
+            document.getElementById('caption').textContent = `Found ${step.target} at index ${step.mid}.`;
+        } else if (step.failed) {
+            document.getElementById('caption').textContent = `${step.target} not found in the array.`;
+        } else {
+            document.getElementById('caption').textContent = `Low: ${step.low}, High: ${step.high}, Mid: ${step.mid} (value: ${step.array[step.mid]}).`;
+        }
+    }
+
+    function nextStep() {
+        if (currentStep < steps.length - 1) {
+            showStep(currentStep + 1);
+        }
+    }
+    function prevStep() {
+        if (currentStep > 0) {
+            showStep(currentStep - 1, true);
+        }
+    }
+
+    function getSpeed() {
+        const slider = document.getElementById('speed-control');
+        const min = parseInt(slider.min);
+        const max = parseInt(slider.max);
+        const val = parseInt(slider.value);
+        return max + min - val;
+    }
+
+    function togglePlay() {
+        const btn = document.getElementById('playPauseBtn');
+        const speed = getSpeed();
+        if (playInterval) {
+            clearInterval(playInterval);
+            playInterval = null;
+            btn.textContent = "Play";
+        } else {
+            btn.textContent = "Pause";
+            playInterval = setInterval(() => {
+                if (currentStep < steps.length - 1) {
+                    nextStep();
+                } else {
+                    clearInterval(playInterval);
+                    playInterval = null;
+                    btn.textContent = "Play";
+                }
+            }, speed);
+        }
+    }
+
+    document.getElementById('speed-control').addEventListener('input', function() {
+        if (playInterval) {
+            togglePlay();
+            togglePlay();
+        }
+    });
+
+    function resetVisualizer() {
+        if (playInterval) togglePlay();
+        currentStep = 0;
+        showStep(0, true);
+    }
+
+    // Initial render
+    prepareSteps();
+    </script>
+</body>
+</html>

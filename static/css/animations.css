@@ -1,0 +1,1653 @@
+/* General Styles */
+.section-card {
+    background: #2c3e50;
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.section-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.section-description {
+    color: #ecf0f1;
+    font-size: 1.1em;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.concepts-container {
+    display: grid;
+    gap: 20px;
+}
+
+/* Language Selection Styles */
+.list-group-item {
+    background-color: #34495e;
+    border: 1px solid #2c3e50;
+    color: #ecf0f1;
+    transition: all 0.3s ease;
+}
+
+.list-group-item:hover {
+    background-color: #2c3e50;
+    transform: translateX(5px);
+}
+
+.list-group-item.active {
+    background-color: #3498db;
+    border-color: #3498db;
+}
+
+.list-group-item i {
+    margin-right: 10px;
+    width: 20px;
+    text-align: center;
+}
+
+/* Introduction Animations */
+#python-intro-animation,
+#js-intro-animation,
+#java-intro-animation {
+    background: linear-gradient(45deg, #2c3e50, #3498db);
+    position: relative;
+    overflow: hidden;
+}
+
+#python-intro-animation::before,
+#js-intro-animation::before,
+#java-intro-animation::before {
+    content: '';
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background: #e74c3c;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: introPulse 2s infinite;
+}
+
+/* Variables Animation */
+#variables-animation,
+#js-variables-animation {
+    background: linear-gradient(45deg, #2c3e50, #3498db);
+    position: relative;
+}
+
+#variables-animation::before,
+#js-variables-animation::before {
+    content: '';
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: #e74c3c;
+    border-radius: 50%;
+    top: 50%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+    animation: variableFloat 2s infinite;
+}
+
+#variables-animation::after,
+#js-variables-animation::after {
+    content: 'age = 25';
+    position: absolute;
+    color: white;
+    top: 50%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+    font-family: monospace;
+    font-size: 14px;
+}
+
+/* Control Flow Animation */
+#control-flow-animation {
+    background: linear-gradient(45deg, #2c3e50, #2ecc71);
+    position: relative;
+}
+
+#control-flow-animation::before {
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: #f1c40f;
+    border-radius: 50%;
+    top: 50%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+    animation: controlFlow 3s infinite;
+}
+
+/* Functions Animation */
+#functions-animation,
+#js-functions-animation {
+    background: linear-gradient(45deg, #2c3e50, #9b59b6);
+    position: relative;
+}
+
+#functions-animation::before,
+#js-functions-animation::before {
+    content: '';
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background: #1abc9c;
+    border-radius: 50%;
+    top: 50%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+    animation: functionCall 2s infinite;
+}
+
+/* Modules Animation */
+#modules-animation {
+    background: linear-gradient(45deg, #2c3e50, #f39c12);
+    position: relative;
+}
+
+#modules-animation::before {
+    content: '';
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background: #3498db;
+    border-radius: 10px;
+    top: 50%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+    animation: moduleImport 2s infinite;
+}
+
+/* OOP Animation */
+#oop-animation {
+    background: linear-gradient(45deg, #2c3e50, #e67e22);
+    position: relative;
+}
+
+#oop-animation::before {
+    content: '';
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background: #3498db;
+    border-radius: 10px;
+    top: 50%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+    animation: javaClass 3s infinite;
+}
+
+/* Animation Keyframes */
+@keyframes introPulse {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+    50% { transform: translate(-50%, -50%) scale(1.5); opacity: 0.5; }
+}
+
+@keyframes variableFloat {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); }
+    50% { transform: translate(-50%, -50%) scale(1.2); }
+}
+
+@keyframes controlFlow {
+    0% { left: 20%; }
+    50% { left: 80%; }
+    100% { left: 20%; }
+}
+
+@keyframes functionCall {
+    0% { transform: translate(-50%, -50%) scale(1); }
+    50% { transform: translate(-50%, -50%) scale(1.5); }
+    100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+@keyframes moduleImport {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    50% { transform: translate(-50%, -50%) rotate(180deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes javaClass {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    50% { transform: translate(-50%, -50%) rotate(360deg); }
+    100% { transform: translate(-50%, -50%) rotate(0deg); }
+}
+
+/* Concept Card Styles */
+.concept-card {
+    background: #34495e;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    color: white;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.concept-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.concept-card h3 {
+    color: #3498db;
+    margin-bottom: 10px;
+    font-size: 1.5em;
+}
+
+.concept-card p {
+    color: #ecf0f1;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.code-snippet {
+    background: #1a1a1a;
+    padding: 15px;
+    border-radius: 5px;
+    margin: 10px 0;
+    overflow-x: auto;
+    border: 1px solid #2c3e50;
+}
+
+.animation-container {
+    width: 100%;
+    height: 200px;
+    background: #1a1a1a;
+    border-radius: 10px;
+    margin: 10px 0;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #2c3e50;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.animation-container:hover {
+    transform: scale(1.05);
+}
+
+/* Fade In Animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+    animation: fadeIn 1s ease-in;
+}
+
+/* Alert Styles */
+.alert {
+    background-color: #34495e;
+    border: 1px solid #2c3e50;
+    color: #ecf0f1;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.alert h4 {
+    color: #3498db;
+    margin-bottom: 10px;
+}
+
+/* Advanced Concept Animations */
+#decorator-animation {
+    background: linear-gradient(45deg, #2c3e50, #e74c3c);
+    position: relative;
+}
+
+#decorator-animation::before {
+    content: '';
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: #3498db;
+    border-radius: 50%;
+    top: 50%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+    animation: decoratorPulse 2s infinite;
+}
+
+#context-manager-animation {
+    background: linear-gradient(45deg, #2c3e50, #2ecc71);
+    position: relative;
+}
+
+#context-manager-animation::before {
+    content: '';
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background: #f1c40f;
+    border-radius: 10px;
+    top: 50%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+    animation: contextManager 3s infinite;
+}
+
+#generator-animation {
+    background: linear-gradient(45deg, #2c3e50, #9b59b6);
+    position: relative;
+}
+
+#generator-animation::before {
+    content: '';
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background: #1abc9c;
+    border-radius: 50%;
+    top: 50%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+    animation: generatorFlow 2s infinite;
+}
+
+#async-animation {
+    background: linear-gradient(45deg, #2c3e50, #3498db);
+    position: relative;
+}
+
+#async-animation::before {
+    content: '';
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: #e74c3c;
+    border-radius: 50%;
+    top: 50%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+    animation: asyncPulse 2s infinite;
+}
+
+#closure-animation {
+    background: linear-gradient(45deg, #2c3e50, #f39c12);
+    position: relative;
+}
+
+#closure-animation::before {
+    content: '';
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background: #3498db;
+    border-radius: 10px;
+    top: 50%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+    animation: closureWrap 3s infinite;
+}
+
+#generics-animation {
+    background: linear-gradient(45deg, #2c3e50, #e67e22);
+    position: relative;
+}
+
+#generics-animation::before {
+    content: '';
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: #3498db;
+    border-radius: 50%;
+    top: 50%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+    animation: genericTransform 2s infinite;
+}
+
+#streams-animation {
+    background: linear-gradient(45deg, #2c3e50, #1abc9c);
+    position: relative;
+}
+
+#streams-animation::before {
+    content: '';
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background: #f1c40f;
+    border-radius: 50%;
+    top: 50%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+    animation: streamFlow 2s infinite;
+}
+
+/* New Animation Keyframes */
+@keyframes decoratorPulse {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); }
+    50% { transform: translate(-50%, -50%) scale(1.5) rotate(180deg); }
+}
+
+@keyframes contextManager {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    50% { transform: translate(-50%, -50%) rotate(180deg) scale(1.2); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes generatorFlow {
+    0% { transform: translate(-50%, -50%) scale(1); }
+    50% { transform: translate(-50%, -50%) scale(1.5); }
+    100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+@keyframes asyncPulse {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+    50% { transform: translate(-50%, -50%) scale(1.5); opacity: 0.5; }
+}
+
+@keyframes closureWrap {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    50% { transform: translate(-50%, -50%) rotate(180deg) scale(1.2); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes genericTransform {
+    0% { transform: translate(-50%, -50%) scale(1); }
+    50% { transform: translate(-50%, -50%) scale(1.5) rotate(180deg); }
+    100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+@keyframes streamFlow {
+    0% { transform: translate(-50%, -50%) scale(1); }
+    50% { transform: translate(-50%, -50%) scale(1.5); }
+    100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+/* Exercise Container Styles */
+.exercise-container {
+    background: #34495e;
+    border-radius: 10px;
+    padding: 15px;
+    margin-top: 15px;
+    border: 1px solid #2c3e50;
+}
+
+.exercise-container h4 {
+    color: #3498db;
+    margin-bottom: 10px;
+}
+
+.exercise-container p {
+    color: #ecf0f1;
+    margin-bottom: 15px;
+}
+
+.show-solution {
+    background-color: #3498db;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.show-solution:hover {
+    background-color: #2980b9;
+}
+
+.solution {
+    margin-top: 10px;
+    padding: 10px;
+    background: #e5e7eb;
+    border-radius: 4px;
+}
+
+/* Type Conversion Animation */
+#type-conversion-animation {
+    background: linear-gradient(45deg, #2c3e50, #f39c12);
+    position: relative;
+}
+
+#type-conversion-animation::before {
+    content: '';
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: #3498db;
+    border-radius: 50%;
+    top: 50%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+    animation: typeTransform 2s infinite;
+}
+
+/* Conditional Animation */
+#conditional-animation {
+    background: linear-gradient(45deg, #2c3e50, #2ecc71);
+    position: relative;
+}
+
+#conditional-animation::before {
+    content: '';
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background: #e74c3c;
+    border-radius: 50%;
+    top: 50%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+    animation: conditionalFlow 3s infinite;
+}
+
+/* Loops Animation */
+#loops-animation {
+    background: linear-gradient(45deg, #2c3e50, #9b59b6);
+    position: relative;
+}
+
+#loops-animation::before {
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: #f1c40f;
+    border-radius: 50%;
+    top: 50%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+    animation: loopCycle 2s infinite;
+}
+
+/* Lambda Animation */
+#lambda-animation {
+    background: linear-gradient(45deg, #2c3e50, #e67e22);
+    position: relative;
+}
+
+#lambda-animation::before {
+    content: '';
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background: #1abc9c;
+    border-radius: 50%;
+    top: 50%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+    animation: lambdaTransform 2s infinite;
+}
+
+/* Lists and Tuples Animation */
+#lists-tuples-animation {
+    background: linear-gradient(45deg, #2c3e50, #3498db);
+    position: relative;
+}
+
+#lists-tuples-animation::before {
+    content: '';
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: #e74c3c;
+    border-radius: 10px;
+    top: 50%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+    animation: listTransform 3s infinite;
+}
+
+/* Dictionaries and Sets Animation */
+#dicts-sets-animation {
+    background: linear-gradient(45deg, #2c3e50, #f1c40f);
+    position: relative;
+}
+
+#dicts-sets-animation::before {
+    content: '';
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background: #3498db;
+    border-radius: 10px;
+    top: 50%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+    animation: dictTransform 2s infinite;
+}
+
+/* Classes Animation */
+#classes-animation {
+    background: linear-gradient(45deg, #2c3e50, #1abc9c);
+    position: relative;
+}
+
+#classes-animation::before {
+    content: '';
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: #3498db;
+    border-radius: 10px;
+    top: 50%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+    animation: classTransform 3s infinite;
+}
+
+/* Inheritance Animation */
+#inheritance-animation {
+    background: linear-gradient(45deg, #2c3e50, #e74c3c);
+    position: relative;
+}
+
+#inheritance-animation::before {
+    content: '';
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background: #f1c40f;
+    border-radius: 10px;
+    top: 50%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+    animation: inheritTransform 2s infinite;
+}
+
+/* New Animation Keyframes */
+@keyframes typeTransform {
+    0% { transform: translate(-50%, -50%) scale(1); }
+    50% { transform: translate(-50%, -50%) scale(1.5) rotate(180deg); }
+    100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+@keyframes conditionalFlow {
+    0% { left: 20%; }
+    50% { left: 80%; }
+    100% { left: 20%; }
+}
+
+@keyframes loopCycle {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes lambdaTransform {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); }
+    50% { transform: translate(-50%, -50%) scale(1.5); }
+}
+
+@keyframes listTransform {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    50% { transform: translate(-50%, -50%) rotate(180deg) scale(1.2); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes dictTransform {
+    0% { transform: translate(-50%, -50%) scale(1); }
+    50% { transform: translate(-50%, -50%) scale(1.5) rotate(180deg); }
+    100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+@keyframes classTransform {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    50% { transform: translate(-50%, -50%) rotate(180deg) scale(1.2); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes inheritTransform {
+    0% { transform: translate(-50%, -50%) scale(1); }
+    50% { transform: translate(-50%, -50%) scale(1.5) rotate(180deg); }
+    100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+/* I/O Animation */
+#io-animation {
+    background: linear-gradient(45deg, #2c3e50, #3498db);
+    position: relative;
+    overflow: hidden;
+    perspective: 1000px;
+}
+
+.io-flow {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+}
+
+.io-input {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background: #e74c3c;
+    border-radius: 50%;
+    top: 50%;
+    left: 20%;
+    transform: translate(-50%, -50%) translateZ(0);
+    animation: inputFlow 3s infinite;
+}
+
+.io-output {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background: #2ecc71;
+    border-radius: 50%;
+    top: 50%;
+    left: 80%;
+    transform: translate(-50%, -50%) translateZ(0);
+    animation: outputFlow 3s infinite;
+}
+
+.io-path {
+    position: absolute;
+    width: 60%;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.3);
+    top: 50%;
+    left: 20%;
+    transform: translateY(-50%);
+    animation: pathPulse 2s infinite;
+}
+
+@keyframes inputFlow {
+    0% { transform: translate(-50%, -50%) translateZ(0) scale(1); }
+    50% { transform: translate(-50%, -50%) translateZ(50px) scale(1.2); }
+    100% { transform: translate(-50%, -50%) translateZ(0) scale(1); }
+}
+
+@keyframes outputFlow {
+    0% { transform: translate(-50%, -50%) translateZ(0) scale(1); }
+    50% { transform: translate(-50%, -50%) translateZ(50px) scale(1.2); }
+    100% { transform: translate(-50%, -50%) translateZ(0) scale(1); }
+}
+
+@keyframes pathPulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+}
+
+/* Data Types Animation */
+#data-types-animation {
+    background: linear-gradient(45deg, #2c3e50, #2ecc71);
+    position: relative;
+    overflow: hidden;
+    perspective: 1000px;
+}
+
+.type-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+}
+
+.type-element {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    top: 50%;
+    left: 50%;
+    transform-style: preserve-3d;
+    animation: typeTransform 4s infinite;
+}
+
+.type-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    backface-visibility: hidden;
+}
+
+.type-face.front {
+    background: #f1c40f;
+    transform: translateZ(30px);
+}
+
+.type-face.back {
+    background: #3498db;
+    transform: rotateY(180deg) translateZ(30px);
+}
+
+@keyframes typeTransform {
+    0% { transform: translate(-50%, -50%) rotateY(0deg); }
+    50% { transform: translate(-50%, -50%) rotateY(180deg); }
+    100% { transform: translate(-50%, -50%) rotateY(360deg); }
+}
+
+/* Built-in Functions Animation */
+#builtin-functions-animation {
+    background: linear-gradient(45deg, #2c3e50, #9b59b6);
+    position: relative;
+    overflow: hidden;
+}
+
+.function-element {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: #1abc9c;
+    border-radius: 10px;
+    top: 50%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+    animation: functionFlow 2s infinite;
+}
+
+.function-element:nth-child(2) {
+    background: #3498db;
+    animation-delay: 0.5s;
+}
+
+.function-element:nth-child(3) {
+    background: #e74c3c;
+    animation-delay: 1s;
+}
+
+@keyframes functionFlow {
+    0% { transform: translate(-50%, -50%) scale(1) rotate(0deg); }
+    50% { transform: translate(-50%, -50%) scale(1.5) rotate(180deg); }
+    100% { transform: translate(-50%, -50%) scale(1) rotate(360deg); }
+}
+
+/* Libraries Animation */
+#libraries-animation {
+    background: linear-gradient(45deg, #2c3e50, #e67e22);
+    position: relative;
+    overflow: hidden;
+}
+
+.library-element {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background: #3498db;
+    border-radius: 10px;
+    top: 50%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+    animation: libraryFlow 3s infinite;
+}
+
+.library-element::before {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: #e74c3c;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: libraryPulse 1.5s infinite;
+}
+
+@keyframes libraryFlow {
+    0% { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
+    50% { transform: translate(-50%, -50%) rotate(180deg) scale(1.2); }
+    100% { transform: translate(-50%, -50%) rotate(360deg) scale(1); }
+}
+
+@keyframes libraryPulse {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+    50% { transform: translate(-50%, -50%) scale(1.5); opacity: 0.5; }
+}
+
+/* Algorithms Animation */
+#algorithms-animation {
+    background: linear-gradient(45deg, #2c3e50, #1abc9c);
+    position: relative;
+    overflow: hidden;
+}
+
+.algorithm-path {
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background: #f1c40f;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.algorithm-node {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: #e74c3c;
+    border-radius: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    animation: algorithmNode 2s infinite;
+}
+
+@keyframes algorithmNode {
+    0% { left: 20%; }
+    50% { left: 80%; }
+    100% { left: 20%; }
+}
+
+/* String Algorithms Animation */
+#string-algorithms-animation {
+    background: linear-gradient(45deg, #2c3e50, #e74c3c);
+    position: relative;
+    overflow: hidden;
+}
+
+.string-element {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: #3498db;
+    border-radius: 5px;
+    top: 50%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+    animation: stringFlow 3s infinite;
+}
+
+.string-element::before {
+    content: 'A';
+    position: absolute;
+    color: white;
+    font-weight: bold;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes stringFlow {
+    0% { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
+    50% { transform: translate(-50%, -50%) rotate(180deg) scale(1.2); }
+    100% { transform: translate(-50%, -50%) rotate(360deg) scale(1); }
+}
+
+/* Exception Animation */
+#exception-animation {
+    background: linear-gradient(45deg, #2c3e50, #f39c12);
+    position: relative;
+    overflow: hidden;
+    perspective: 1000px;
+}
+
+.exception-flow {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+}
+
+.exception-bubble {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background: rgba(231, 76, 60, 0.8);
+    border: 2px solid #e74c3c;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform-style: preserve-3d;
+    animation: exceptionBubble 3s infinite;
+}
+
+.exception-bubble::before {
+    content: '!';
+    position: absolute;
+    color: white;
+    font-weight: bold;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.exception-trace {
+    position: absolute;
+    width: 2px;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.3);
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: tracePulse 2s infinite;
+}
+
+@keyframes exceptionBubble {
+    0% { transform: translate(-50%, -50%) translateZ(0) scale(1); }
+    50% { transform: translate(-50%, -50%) translateZ(50px) scale(1.5); }
+    100% { transform: translate(-50%, -50%) translateZ(0) scale(1); }
+}
+
+@keyframes tracePulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+}
+
+/* Animation Controls */
+.animation-controls {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    display: flex;
+    gap: 10px;
+    z-index: 10;
+}
+
+.control-button {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: bold;
+}
+
+.control-button:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+.control-button:active {
+    transform: translateY(0);
+}
+
+/* Animation Labels */
+.animation-label {
+    position: absolute;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    width: 100%;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.5);
+    bottom: 0;
+    left: 0;
+    transform: translateZ(20px);
+}
+
+/* Memory Visualization Container */
+.memory-container {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    background: #2c3e50;
+    border-radius: 10px;
+    overflow: hidden;
+    perspective: 1000px;
+}
+
+/* Variables Animation - Shows memory allocation and value storage */
+#variables-animation {
+    background: linear-gradient(45deg, #2c3e50, #3498db);
+    position: relative;
+    overflow: hidden;
+}
+
+.memory-block {
+    position: absolute;
+    width: 80px;
+    height: 60px;
+    background: rgba(46, 204, 113, 0.8);
+    border: 2px solid #2ecc71;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    transform-style: preserve-3d;
+    animation: memoryAllocate 2s infinite;
+}
+
+.memory-block::before {
+    content: 'x = 10';
+    position: absolute;
+    top: 5px;
+    font-size: 0.8em;
+}
+
+.memory-block::after {
+    content: '0x7fff';
+    position: absolute;
+    bottom: 5px;
+    font-size: 0.6em;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+@keyframes memoryAllocate {
+    0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+    50% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+    100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+}
+
+/* Functions Animation - Shows function call stack and parameter passing */
+#functions-animation {
+    background: linear-gradient(45deg, #2c3e50, #9b59b6);
+    position: relative;
+    overflow: hidden;
+}
+
+.stack-frame {
+    position: absolute;
+    width: 120px;
+    height: 80px;
+    background: rgba(26, 188, 156, 0.8);
+    border: 2px solid #1abc9c;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    transform-style: preserve-3d;
+    animation: stackPush 3s infinite;
+}
+
+.stack-frame::before {
+    content: 'add(a, b)';
+    position: absolute;
+    top: 5px;
+    font-size: 0.8em;
+}
+
+.stack-frame::after {
+    content: 'a = 5, b = 3';
+    position: absolute;
+    bottom: 5px;
+    font-size: 0.7em;
+}
+
+@keyframes stackPush {
+    0% { transform: translate(-50%, 100%) translateZ(0); opacity: 0; }
+    20% { transform: translate(-50%, 0) translateZ(0); opacity: 1; }
+    80% { transform: translate(-50%, 0) translateZ(0); opacity: 1; }
+    100% { transform: translate(-50%, -100%) translateZ(0); opacity: 0; }
+}
+
+/* Lists Animation - Shows array/list memory allocation and indexing */
+#lists-animation {
+    background: linear-gradient(45deg, #2c3e50, #e67e22);
+    position: relative;
+    overflow: hidden;
+}
+
+.array-block {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background: rgba(52, 152, 219, 0.8);
+    border: 2px solid #3498db;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    transform-style: preserve-3d;
+}
+
+.array-block::after {
+    content: attr(data-index);
+    position: absolute;
+    bottom: -15px;
+    font-size: 0.6em;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.array-block:nth-child(1) { left: 20%; animation: arrayAccess 3s infinite; }
+.array-block:nth-child(2) { left: 35%; animation: arrayAccess 3s infinite 0.5s; }
+.array-block:nth-child(3) { left: 50%; animation: arrayAccess 3s infinite 1s; }
+.array-block:nth-child(4) { left: 65%; animation: arrayAccess 3s infinite 1.5s; }
+.array-block:nth-child(5) { left: 80%; animation: arrayAccess 3s infinite 2s; }
+
+@keyframes arrayAccess {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-20px) scale(1.2); }
+}
+
+/* OOP Animation - Shows object memory layout and method calls */
+#oop-animation {
+    background: linear-gradient(45deg, #2c3e50, #e74c3c);
+    position: relative;
+    overflow: hidden;
+}
+
+.object-block {
+    position: absolute;
+    width: 100px;
+    height: 80px;
+    background: rgba(241, 196, 15, 0.8);
+    border: 2px solid #f1c40f;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    transform-style: preserve-3d;
+    animation: objectCreate 3s infinite;
+}
+
+.object-block::before {
+    content: 'Person';
+    position: absolute;
+    top: 5px;
+    font-size: 0.8em;
+}
+
+.object-block::after {
+    content: 'name: "John"';
+    position: absolute;
+    bottom: 5px;
+    font-size: 0.7em;
+}
+
+.method-call {
+    position: absolute;
+    width: 60px;
+    height: 40px;
+    background: rgba(46, 204, 113, 0.8);
+    border: 2px solid #2ecc71;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    transform-style: preserve-3d;
+    animation: methodExecute 3s infinite;
+}
+
+@keyframes objectCreate {
+    0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+    50% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+    100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+}
+
+@keyframes methodExecute {
+    0% { transform: translate(-50%, -50%) scale(1); }
+    50% { transform: translate(-50%, -50%) scale(1.2); }
+    100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+/* Control Flow Animation - Shows if-else and loop execution */
+#control-flow-animation {
+    background: linear-gradient(45deg, #2c3e50, #1abc9c);
+    position: relative;
+    overflow: hidden;
+}
+
+.condition-block {
+    position: absolute;
+    width: 80px;
+    height: 40px;
+    background: rgba(52, 152, 219, 0.8);
+    border: 2px solid #3498db;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    transform-style: preserve-3d;
+    animation: conditionCheck 3s infinite;
+}
+
+.condition-block::before {
+    content: 'if (x > 0)';
+    font-size: 0.8em;
+}
+
+.flow-path {
+    position: absolute;
+    width: 2px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.5);
+    animation: flowPulse 2s infinite;
+}
+
+@keyframes conditionCheck {
+    0% { transform: translate(-50%, -50%) scale(1); }
+    50% { transform: translate(-50%, -50%) scale(1.2); }
+    100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+@keyframes flowPulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+}
+
+/* JavaScript Animations */
+.js-basics-animation {
+    background: linear-gradient(45deg, #f3f4f6, #e5e7eb);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.js-basics-animation::before {
+    content: '';
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background: #4f46e5;
+    border-radius: 50%;
+    animation: variable-pulse 2s infinite;
+}
+
+@keyframes variable-pulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.2); opacity: 0.7; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.js-control-flow-animation {
+    background: linear-gradient(45deg, #f3f4f6, #e5e7eb);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.js-control-flow-animation::before {
+    content: '';
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: #10b981;
+    border-radius: 8px;
+    animation: control-flow 3s infinite;
+}
+
+@keyframes control-flow {
+    0% { transform: translateX(-100px); }
+    25% { transform: translateX(0) rotate(90deg); }
+    50% { transform: translateX(100px) rotate(180deg); }
+    75% { transform: translateX(0) rotate(270deg); }
+    100% { transform: translateX(-100px) rotate(360deg); }
+}
+
+.js-loops-animation {
+    background: linear-gradient(45deg, #f3f4f6, #e5e7eb);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.js-loops-animation::before {
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: #f59e0b;
+    border-radius: 50%;
+    animation: loop-rotation 2s infinite;
+}
+
+@keyframes loop-rotation {
+    0% { transform: rotate(0deg) translateX(50px); }
+    100% { transform: rotate(360deg) translateX(50px); }
+}
+
+.js-functions-animation {
+    background: linear-gradient(45deg, #f3f4f6, #e5e7eb);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.js-functions-animation::before {
+    content: '';
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background: #3b82f6;
+    border-radius: 8px;
+    animation: function-call 2s infinite;
+}
+
+@keyframes function-call {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-30px); }
+    100% { transform: translateY(0); }
+}
+
+.js-arrays-animation {
+    background: linear-gradient(45deg, #f3f4f6, #e5e7eb);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.js-arrays-animation::before {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: #8b5cf6;
+    border-radius: 4px;
+    animation: array-access 2s infinite;
+}
+
+@keyframes array-access {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(30px); }
+    50% { transform: translateX(60px); }
+    75% { transform: translateX(30px); }
+    100% { transform: translateX(0); }
+}
+
+.js-strings-animation {
+    background: linear-gradient(45deg, #f3f4f6, #e5e7eb);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.js-strings-animation::before {
+    content: 'Hello';
+    position: absolute;
+    font-size: 24px;
+    color: #ec4899;
+    animation: string-manipulation 2s infinite;
+}
+
+@keyframes string-manipulation {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+.js-objects-animation {
+    background: linear-gradient(45deg, #f3f4f6, #e5e7eb);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.js-objects-animation::before {
+    content: '';
+    position: absolute;
+    width: 60px;
+    height: 40px;
+    background: #14b8a6;
+    border-radius: 8px;
+    animation: object-property 2s infinite;
+}
+
+@keyframes object-property {
+    0% { transform: translateX(0) rotate(0deg); }
+    50% { transform: translateX(30px) rotate(180deg); }
+    100% { transform: translateX(0) rotate(360deg); }
+}
+
+.js-sets-maps-animation {
+    background: linear-gradient(45deg, #f3f4f6, #e5e7eb);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.js-sets-maps-animation::before {
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: #f97316;
+    border-radius: 50%;
+    animation: set-map-operation 2s infinite;
+}
+
+@keyframes set-map-operation {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.5); }
+    100% { transform: scale(1); }
+}
+
+.js-math-animation {
+    background: linear-gradient(45deg, #f3f4f6, #e5e7eb);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.js-math-animation::before {
+    content: '';
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background: #06b6d4;
+    border-radius: 8px;
+    animation: math-operation 2s infinite;
+}
+
+@keyframes math-operation {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.js-builtins-animation {
+    background: linear-gradient(45deg, #f3f4f6, #e5e7eb);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.js-builtins-animation::before {
+    content: '';
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: #6366f1;
+    border-radius: 8px;
+    animation: builtin-function 2s infinite;
+}
+
+@keyframes builtin-function {
+    0% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-20px) scale(1.2); }
+    100% { transform: translateY(0) scale(1); }
+}
+
+.js-recursion-animation {
+    background: linear-gradient(45deg, #f3f4f6, #e5e7eb);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.js-recursion-animation::before {
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: #d946ef;
+    border-radius: 50%;
+    animation: recursive-call 2s infinite;
+}
+
+@keyframes recursive-call {
+    0% { transform: scale(1); }
+    50% { transform: scale(0.5); }
+    100% { transform: scale(1); }
+}
+
+.js-search-sort-animation {
+    background: linear-gradient(45deg, #f3f4f6, #e5e7eb);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.js-search-sort-animation::before {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: #ef4444;
+    border-radius: 4px;
+    animation: search-sort 2s infinite;
+}
+
+@keyframes search-sort {
+    0% { transform: translateX(0); }
+    50% { transform: translateX(50px); }
+    100% { transform: translateX(0); }
+}
+
+.js-complexity-animation {
+    background: linear-gradient(45deg, #f3f4f6, #e5e7eb);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.js-complexity-animation::before {
+    content: '';
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background: #22c55e;
+    border-radius: 8px;
+    animation: complexity-growth 2s infinite;
+}
+
+@keyframes complexity-growth {
+    0% { transform: scale(1); }
+    50% { transform: scale(2); }
+    100% { transform: scale(1); }
+}
+
+/* Interactive elements */
+.animation-container:hover::before {
+    animation-play-state: paused;
+}
+
+.animation-container:active::before {
+    animation-play-state: running;
+    animation-duration: 1s;
+}
+
+/* Code highlighting */
+pre {
+    background: #1e1e1e;
+    color: #d4d4d4;
+    padding: 15px;
+    border-radius: 8px;
+    overflow-x: auto;
+}
+
+code {
+    font-family: 'Fira Code', monospace;
+    font-size: 14px;
+} 

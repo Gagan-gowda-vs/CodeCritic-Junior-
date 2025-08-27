@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Assistant - CodeCritic Junior</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --background-color: #f8f9fa;
+            --card-hover-color: #f1f8ff;
+        }
+
+        body {
+            background-color: var(--background-color);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .chat-container {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            height: 600px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-messages {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+        }
+
+        .message {
+            margin-bottom: 1.5rem;
+            padding: 1.5rem;
+            border-radius: 8px;
+            max-width: 85%;
+        }
+
+        .user-message {
+            background-color: var(--secondary-color);
+            color: white;
+            margin-left: auto;
+        }
+
+        .ai-message {
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+        }
+
+        .message-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .message-header i {
+            margin-right: 0.5rem;
+        }
+
+        .message-content {
+            white-space: pre-wrap;
+            font-family: 'Consolas', monospace;
+            background: rgba(0, 0, 0, 0.05);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 0.5rem;
+            line-height: 1.6;
+        }
+
+        .message-timestamp {
+            font-size: 0.8rem;
+            color: #6c757d;
+            margin-top: 0.5rem;
+            text-align: right;
+        }
+
+        .section-title {
+            font-weight: 600;
+            margin: 1rem 0 0.5rem 0;
+            color: var(--primary-color);
+        }
+
+        .constraints-list {
+            list-style: none;
+            padding-left: 1.5rem;
+            margin: 0.5rem 0;
+        }
+
+        .constraints-list li {
+            margin-bottom: 0.5rem;
+            position: relative;
+        }
+
+        .constraints-list li:before {
+            content: "•";
+            position: absolute;
+            left: -1rem;
+            color: var(--secondary-color);
+        }
+
+        .algorithm-steps {
+            counter-reset: step;
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .algorithm-steps li {
+            margin-bottom: 1rem;
+            padding-left: 2rem;
+            position: relative;
+        }
+
+        .algorithm-steps li:before {
+            counter-increment: step;
+            content: counter(step);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 1.5rem;
+            height: 1.5rem;
+            background: var(--secondary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+        }
+
+        .input-container {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .input-container textarea {
+            flex-grow: 1;
+            padding: 0.75rem;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            resize: none;
+        }
+
+        .btn-send {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-send:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        .feedback-container {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .feedback-section {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+        }
+
+        .feedback-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .feedback-header i {
+            margin-right: 0.5rem;
+            font-size: 1.5rem;
+        }
+
+        .feedback-content {
+            font-family: 'Consolas', monospace;
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            white-space: pre-wrap;
+            line-height: 1.6;
+        }
+
+        .feedback-metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .metric-card {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .metric-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--secondary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-label {
+            font-size: 1rem;
+            color: #6c757d;
+        }
+
+        .emoji-section {
+            font-size: 1.2rem;
+            margin-right: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <h1 class="text-center mb-3">AI Assistant</h1>
+            <p class="text-center mb-0">Get help with your coding questions and receive instant feedback</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="chat-container">
+                    <div class="chat-messages" id="chat-messages">
+                        <!-- Messages will be added here dynamically -->
+                    </div>
+                    <div class="input-container">
+                        <textarea id="user-input" rows="3" placeholder="Type your question here..."></textarea>
+                        <button class="btn btn-send" onclick="sendMessage()">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feedback-container">
+                    <h3 class="mb-4">AI Feedback</h3>
+                    <div class="feedback-section">
+                        <div class="feedback-header">
+                            <i class="fas fa-code"></i>
+                            <h4 class="mb-0">Code Analysis</h4>
+                        </div>
+                        <div class="feedback-content" id="code-analysis">
+                            <!-- Code analysis will be added here -->
+                        </div>
+                    </div>
+                    <div class="feedback-section">
+                        <div class="feedback-header">
+                            <i class="fas fa-lightbulb"></i>
+                            <h4 class="mb-0">Suggestions</h4>
+                        </div>
+                        <div class="feedback-content" id="suggestions">
+                            <!-- Suggestions will be added here -->
+                        </div>
+                    </div>
+                    <div class="feedback-metrics">
+                        <div class="metric-card">
+                            <div class="metric-value" id="complexity-score">0</div>
+                            <div class="metric-label">Complexity Score</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value" id="efficiency-score">0</div>
+                            <div class="metric-label">Efficiency Score</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value" id="readability-score">0</div>
+                            <div class="metric-label">Readability Score</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function sendMessage() {
+            const input = document.getElementById('user-input');
+            const message = input.value.trim();
+            if (!message) return;
+
+            // Add user message
+            addMessage('user', message);
+            input.value = '';
+
+            // Simulate AI response (replace with actual API call)
+            setTimeout(() => {
+                const response = formatAIResponse(message);
+                addMessage('ai', response);
+                updateFeedback();
+            }, 1000);
+        }
+
+        function formatAIResponse(message) {
+            // Example of a structured response
+            return `✅ Problem Statement
+You are given an array of integers nums and an integer target.
+Your task is to return the indices of the two numbers such that they add up to the target.
+
+Constraints:
+• Each input will have exactly one solution
+• You cannot use the same element twice
+• All numbers are unique
+
+🎯 Objective
+Find indices i and j such that:
+nums[i] + nums[j] = target
+
+🧠 Approach: Using Hash Map (Optimal Solution)
+✅ Why Hash Map?
+• It allows us to store and lookup values in constant time O(1)
+• Much faster than a brute-force approach (which is O(n²))
+
+🔄 Step-by-Step Algorithm
+1. Create an empty dictionary (num_map) to store the number and its index
+2. Loop through each number in the list with its index
+3. For each number num, compute its complement:
+   complement = target - num
+4. Check if this complement is already in the dictionary
+5. If yes, return [index of complement, current index]
+6. If not, add num and its index to the dictionary
+7. If no solution is found (though problem guarantees one), return an empty list
+
+⏱️ Time Complexity: O(n)
+💾 Space Complexity: O(n)`;
+        }
+
+        function addMessage(type, content) {
+            const messagesDiv = document.getElementById('chat-messages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${type}-message`;
+
+            const header = document.createElement('div');
+            header.className = 'message-header';
+            header.innerHTML = `<i class="fas fa-${type === 'user' ? 'user' : 'robot'}"></i> ${type === 'user' ? 'You' : 'AI Assistant'}`;
+
+            const contentDiv = document.createElement('div');
+            contentDiv.className = 'message-content';
+            contentDiv.textContent = content;
+
+            const timestamp = document.createElement('div');
+            timestamp.className = 'message-timestamp';
+            timestamp.textContent = new Date().toLocaleTimeString();
+
+            messageDiv.appendChild(header);
+            messageDiv.appendChild(contentDiv);
+            messageDiv.appendChild(timestamp);
+            messagesDiv.appendChild(messageDiv);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+
+        function updateFeedback() {
+            // Update code analysis
+            document.getElementById('code-analysis').textContent = 
+                "📊 Code Structure Analysis:\n\n" +
+                "1. Function Organization: Good\n" +
+                "   • Clear function naming\n" +
+                "   • Proper separation of concerns\n" +
+                "   • Logical flow of operations\n\n" +
+                "2. Variable Naming: Clear and Consistent\n" +
+                "   • Descriptive variable names\n" +
+                "   • Consistent naming conventions\n" +
+                "   • No ambiguous abbreviations\n\n" +
+                "3. Code Style: Follows Best Practices\n" +
+                "   • Proper indentation\n" +
+                "   • Consistent spacing\n" +
+                "   • Clean code structure\n\n" +
+                "4. Documentation: Needs Improvement\n" +
+                "   • Add function documentation\n" +
+                "   • Include parameter descriptions\n" +
+                "   • Document return values";
+
+            // Update suggestions
+            document.getElementById('suggestions').textContent = 
+                "💡 Recommendations:\n\n" +
+                "1. Input Validation\n" +
+                "   • Add null checks\n" +
+                "   • Validate array bounds\n" +
+                "   • Handle edge cases\n\n" +
+                "2. Error Handling\n" +
+                "   • Add try-catch blocks\n" +
+                "   • Implement error messages\n" +
+                "   • Handle exceptions gracefully\n\n" +
+                "3. Documentation\n" +
+                "   • Add function comments\n" +
+                "   • Document parameters\n" +
+                "   • Include usage examples\n\n" +
+                "4. Edge Cases\n" +
+                "   • Handle empty arrays\n" +
+                "   • Consider negative numbers\n" +
+                "   • Test with large inputs";
+
+            // Update metrics
+            document.getElementById('complexity-score').textContent = "8.5";
+            document.getElementById('efficiency-score').textContent = "9.0";
+            document.getElementById('readability-score').textContent = "8.0";
+        }
+
+        // Initialize with a welcome message
+        window.onload = function() {
+            addMessage('ai', "👋 Hello! I'm your AI coding assistant. How can I help you today?");
+        };
+    </script>
+</body>
+</html> 
