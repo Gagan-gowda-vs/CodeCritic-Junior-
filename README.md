@@ -37,13 +37,13 @@ Here’s a glimpse of the CodeCritic Junior platform in action.
 <img src="images/Dashboard.png" alt="CodeCritic Junior Dashboard" width="80%">
 <p><em>The main dashboard with AI Assistant integration.</em></p>
 <br>
-<img src="https://i.imgur.com/your-learning-center.png" alt="Learning Center" width="80%">
+<img src="images/learn_center.png" alt="Learning Center" width="80%">
 <p><em>Interactive Learning Center with multi-language support.</em></p>
 <br>
-<img src="https://i.imgur.com/your-competitive-coding.png" alt="Competitive Coding Problems" width="80%">
+<img src="images/competative_coding_plat.png" alt="Competitive Coding Problems" width="80%">
 <p><em>Competitive Coding section to practice problem-solving.</em></p>
 <br>
-<img src="https://i.imgur.com/your-visualizer-image.png" alt="Algorithm Visualizer" width="80%">
+<img src="bubble_sort.png" alt="Algorithm Visualizer" width="80%">
 <p><em>Step-by-step Bubble Sort visualizer.</em></p>
 
 ---
@@ -112,4 +112,5 @@ This project was developed by a dedicated team of students from RV College of En
 | Gagan gowda V S | 1RV23AI400 | AIML |
 | Ved M Revankar | 1RV23CS419 | CS |
 | Tejas Ganesh Hegde | 1RV22CS219 | CS |
+
 
