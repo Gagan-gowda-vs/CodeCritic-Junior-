@@ -17,7 +17,6 @@ load_dotenv()
 
 app = Flask(__name__)
 
-app.secret_key = 'b2f8e1a7c9d4e6f0a1b3c5d7e9f2a4c6b8d0e2f4a6c8e0b2d4f6a8c0e2b4d6f8'
 # Configure Gemini API
 GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY')
 print("GOOGLE_API_KEY:", GOOGLE_API_KEY)
@@ -618,4 +617,5 @@ def problem_page(category, problem_id):
                          problem_id=problem_id)
 
 if __name__ == '__main__':
+
     app.run(debug=True)
